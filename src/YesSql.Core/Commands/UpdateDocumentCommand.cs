@@ -47,7 +47,7 @@ namespace YesSql.Commands
 
             if (_checkVersion > -1 && updatedCount != 1)
             {
-                throw new ConcurrencyException();
+                throw new ConcurrencyException(Document);
             }
 
             var context = new DocumentChangeContext
