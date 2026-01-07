@@ -39,7 +39,7 @@ namespace YesSql.Services
                         return "dynamic";
                     }
 
-                    var customName = typeInfo.GetCustomAttribute<SimplifiedTypeName>();
+                    var customName = typeInfo.GetCustomAttribute<SimplifiedTypeNameAttribute>();
                     var calculatedName = string.IsNullOrEmpty(customName?.Name) ? $"{type.FullName}, {typeInfo.Assembly.GetName().Name}" : customName.Name;
                     nameTypes[calculatedName] = t;
 
