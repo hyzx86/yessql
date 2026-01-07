@@ -1,4 +1,8 @@
 using System;
+using System.Collections.Concurrent;
+using System.Reflection;
+using YesSql.Commands;
+using YesSql.Serialization;
 
 namespace YesSql
 {
@@ -16,5 +20,18 @@ namespace YesSql
         /// Gets the type represented by a string.
         /// </summary>
         Type this[string s] { get; }
+
+
+        ConcurrentDictionary<CompoundKey, string> InsertsList { get; set; }
+        ConcurrentDictionary<CompoundKey, string> UpdatesList { get; set; }
+
+        void ResetQueryCache()
+        {
+            InsertsList.Clear();
+            UpdatesList.Clear();
+        }
+
+        PropertyInfo[] GetProperties(Type type);
+        PropertyInfoAccessor GetPropertyAccessors(PropertyInfo property, Func<PropertyInfo, PropertyInfoAccessor> createFactory);
     }
 }
